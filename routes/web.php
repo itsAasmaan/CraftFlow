@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Services\Factory\UserFactory;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,5 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/{project}/clone', [ProjectController::class, 'createFromTemplate'])->name('projects.clone');
     Route::post('/projects/{project}/clone', [ProjectController::class, 'storeFromTemplate'])->name('projects.clone.store');
 });
+
+Route::resource('projects', ProjectController::class);
+Route::post('tasks/{task}/update-assignment', [TaskController::class, 'update'])->name('tasks.update.assignment');
+
+Route::post('projects/{project}/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
 require __DIR__.'/auth.php';
