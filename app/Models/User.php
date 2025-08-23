@@ -59,4 +59,9 @@ class User extends Authenticatable
     public function isEmployee(): bool {
         return $this->role === 'employee';
     }
+
+    public function company()
+    {
+        return $this->belongsTo(\App\Models\Company::class);
+    }
 }

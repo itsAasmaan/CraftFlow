@@ -123,4 +123,13 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    // 'providers' => ServiceProvider::defaultProviders()->merge([
+    //     // ...
+    //     App\Providers\ThemeServiceProvider::class,
+    // ])->toArray(),
+    'providers' => Illuminate\Support\ServiceProvider::defaultProviders()->merge([
+        // ...
+        App\Providers\ThemeServiceProvider::class,
+    ])->toArray(),
+
 ];
