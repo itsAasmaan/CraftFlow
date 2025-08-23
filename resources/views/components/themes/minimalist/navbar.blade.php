@@ -5,6 +5,7 @@
         </div>
         <div class="flex gap-4 items-center justify-between mt-2 mb-2">
             <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-800 font-medium">Dashboard</a>
+            <a href="{{ route('projects.index') }}" class="text-gray-600 hover:text-gray-800 font-medium">Projects</a>
             <a href="{{ route('theme.index') }}" class="text-gray-600 hover:text-gray-800 font-medium">Theme</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
