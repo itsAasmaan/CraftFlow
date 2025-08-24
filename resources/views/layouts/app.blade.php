@@ -26,7 +26,7 @@
                         {!! $themeFactory->createHeader($header)->render() !!}
                     @endisset
 
-                    <main class="mt-6">
+                    <main>
                         {{ $slot }}
                     </main>
                 </div>

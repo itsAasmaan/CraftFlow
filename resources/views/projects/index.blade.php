@@ -3,7 +3,7 @@
         {{ __('Projects') }}
     </h2>
 
-    <div class="py-12">
+    <div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div class="flex justify-between items-center mb-6">
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     @empty
-                        <div class="col-span-full text-center py-12 text-gray-500">
+                        <div class="col-span-full text-center py-6 text-gray-500">
                             {{ __('No projects found. Start by creating a new one!') }}
                         </div>
                     @endforelse

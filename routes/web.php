@@ -6,6 +6,7 @@ use App\Services\Factory\UserFactory;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/projects/{project}/clone', [ProjectController::class, 'createFromTemplate'])->name('projects.clone');
     Route::post('/projects/{project}/clone', [ProjectController::class, 'storeFromTemplate'])->name('projects.clone.store');
+});
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 });
 
 Route::resource('projects', ProjectController::class);
