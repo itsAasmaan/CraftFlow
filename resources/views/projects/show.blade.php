@@ -44,14 +44,13 @@
 
                                     <form action="{{ route('tasks.update.assignment', $task) }}" method="POST" class="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                                         @csrf
-                                        @method('PUT')
                                         
                                         <div class="w-full sm:w-auto">
                                             <label for="status-{{ $task->id }}" class="sr-only">{{ __('Status') }}</label>
                                             <select name="status" id="status-{{ $task->id }}" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
-                                                <option value="pending" {{ $task->status == 'pending' ? 'selected' : '' }}>{{ __('Pending') }}</option>
+                                                <option value="pending" {{ $task->status == 'todo' ? 'selected' : '' }}>{{ __('Pending') }}</option>
                                                 <option value="in_progress" {{ $task->status == 'in_progress' ? 'selected' : '' }}>{{ __('In Progress') }}</option>
-                                                <option value="completed" {{ $task->status == 'completed' ? 'selected' : '' }}>{{ __('Completed') }}</option>
+                                                <option value="completed" {{ $task->status == 'done' ? 'selected' : '' }}>{{ __('Completed') }}</option>
                                             </select>
                                         </div>
 
@@ -95,9 +94,9 @@
                                     <label for="status" class="block text-sm font-medium text-gray-700">{{ __('Status') }}</label>
                                     <div class="mt-1">
                                         <select name="status" id="status" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                            <option value="pending">{{ __('Pending') }}</option>
+                                            <option value="todo">{{ __('Pending') }}</option>
                                             <option value="in_progress">{{ __('In Progress') }}</option>
-                                            <option value="completed">{{ __('Completed') }}</option>
+                                            <option value="done">{{ __('Completed') }}</option>
                                         </select>
                                     </div>
                                 </div>

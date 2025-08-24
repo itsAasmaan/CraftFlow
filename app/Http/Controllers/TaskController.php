@@ -12,7 +12,7 @@ class TaskController extends Controller
     {
         $request->validate([
             'title'       => 'required|string|max:255',
-            'status'      => 'required|in:pending,in_progress,completed',
+            'status'      => 'required|in:todo,in_progress,done',
             'assigned_to' => 'nullable|exists:users,id',
         ]);
 
@@ -31,7 +31,7 @@ class TaskController extends Controller
     {
         $request->validate([
             'assigned_to' => 'nullable|exists:users,id',
-            'status'      => 'required|string|in:pending,in_progress,completed',
+            'status'      => 'required|string|in:todo,in_progress,done',
         ]);
 
         $task->update([
