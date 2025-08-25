@@ -1,21 +1,46 @@
 <x-app-layout>
-    <x-slot name="header">
-        {{ __('Manager Dashboard') }}
-    </x-slot>
-
-    <div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <p class="text-gray-500">
-                        {{ __('Welcome, Manager! Oversee project progress and assign tasks.') }}
-                    </p>
-                    <div class="mt-4 flex gap-3">
-                        {!! $themeFactory->createButton(__('View Team Progress'))->render() !!}
-                        {!! $themeFactory->createSecondaryButton(__('Create Task'))->render() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+     @section('header')
+         <h2 class="text-xl font-semibold leading-tight text-gray-800">
+             Manager Dashboard
+         </h2>
+     @endsection
+     <div class="py-12">
+         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                 {{-- View Team Progress Card --}}
+                 <div class="overflow-hidden rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+                     <h3 class="mb-2 text-lg font-bold text-gray-900">📊 Team Progress</h3>
+                     <p class="mb-4 text-gray-500">
+                         Monitor the overall progress of your team’s projects and tasks.
+                     </p>
+                     <a href="{{ route('projects.index') }}"
+                        class="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-in-out hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                         View Progress
+                     </a>
+                 </div>
+                 {{-- Create Task Card --}}
+                 <div class="overflow-hidden rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+                     <h3 class="mb-2 text-lg font-bold text-gray-900">📝 Create Task</h3>
+                     <p class="mb-4 text-gray-500">
+                         Assign new tasks to employees and track their progress.
+                     </p>
+                     {{-- <a href="{{ route('tasks.create') }}" --}}
+                        {{-- class="inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-in-out hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"> --}}
+                         Create Task
+                     {{-- </a> --}}
+                 </div>
+                 {{-- Team Members Card --}}
+                 <div class="overflow-hidden rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+                     <h3 class="mb-2 text-lg font-bold text-gray-900">👥 Manage Team</h3>
+                     <p class="mb-4 text-gray-500">
+                         Review team members and reassign tasks when needed.
+                     </p>
+                     <a href="{{ route('admin.users.index') }}"
+                        class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-in-out hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                         Manage Team
+                     </a>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </x-app-layout>

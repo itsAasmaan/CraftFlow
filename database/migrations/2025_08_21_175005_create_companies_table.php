@@ -15,7 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('theme')->default('minimal'); 
+            $table->string('industry')->nullable();
+            $table->string('website')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
+            $table->foreignId('company_id')->nullable()->constrained()->onDelete('set null');
         });
     }
 
@@ -25,5 +32,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('companies');
+
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('company_id');
+        });
     }
 };

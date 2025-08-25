@@ -17,7 +17,31 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return view('projects.create');
+        $companies = \App\Models\Company::all();
+        return view('projects.create', compact('companies'));
+    }
+
+    public function edit(Project $project)
+    {
+        $companies = \App\Models\Company::all();
+        return view('projects.edit', compact('project', 'companies'));
+    }
+
+    public function update(Request $request, Project $project)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'company_id' => 'required|exists:companies,id',
+        ]);
+
+        $project->update([
+            'company_id'  => $request->company_id,
+            'name'        => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('projects.index')->with('success', 'Project updated!');
     }
 
     public function store(Request $request)
@@ -25,10 +49,11 @@ class ProjectController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'company_id' => 'required|exists:companies,id',
         ]);
 
         Project::create([
-            'company_id'  => 1,
+            'company_id'  => $request->company_id,
             'name'        => $request->name,
             'description' => $request->description,
         ]);
@@ -46,19 +71,21 @@ class ProjectController extends Controller
     public function createFromTemplate(Project $project)
     {
         $employees = \App\Models\User::all();
-        return view('projects.clone', compact('project', 'employees'));
+        $companies = \App\Models\Company::all();
+
+        return view('projects.clone', compact('project', 'employees', 'companies'));
     }
 
     public function storeFromTemplate(Request $request, Project $project)
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'company_id' => 'required|exists:companies,id',
             'tasks' => 'array'
         ]);
 
         $newProject = ProjectPrototype::clone($project, $request->name, $request->tasks ?? []);
 
-        return redirect()->route('projects.index')
-                         ->with('success', "Project '{$newProject->name}' created from template!");
+        return redirect()->route('projects.index')->with('success', "Project '{$newProject->name}' created from template!");
     }
 }

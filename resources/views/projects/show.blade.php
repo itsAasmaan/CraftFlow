@@ -8,12 +8,24 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="mb-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">
-                            {{ __('Details') }}
-                        </h3>
-                        <p class="text-lg text-gray-600">
-                            {{ $project->description }}
-                        </p>
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                                    {{ __('Details') }}
+                                </h3>
+                                <p class="text-lg text-gray-600">
+                                    {{ $project->description }}
+                                </p>
+                            </div>
+                            <div>
+                                <a href="{{ route('projects.edit',  $project) }}">
+                                    {!! $themeFactory->createButton(__('Edit Project'))->render() !!}
+                                </a>
+                                 <a href="{{ route('projects.index',  $project) }}">
+                                    {!! $themeFactory->createSecondaryButton(__('Back'))->render() !!}
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mt-8">

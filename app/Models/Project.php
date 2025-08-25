@@ -20,4 +20,9 @@ class Project extends Model
     {
         return $this->belongsTo(Project::class, 'template_id');
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

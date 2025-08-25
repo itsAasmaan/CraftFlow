@@ -16,9 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen">
-            @if(auth()->check())
-                {!! $themeFactory->createNavbar()->render() !!}
-            @endif
+            @include('layouts.navigation')
 
             <div class="">
                 <div class="max-w-7xl mx-auto py-6 px-4">

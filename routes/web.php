@@ -7,39 +7,48 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CompanyController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    $user = auth()->user();
-    $roleObject = UserFactory::create($user);
-    return view($roleObject->dashboardView());
-})->middleware(['auth'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        $user = auth()->user();
+        $roleObject = UserFactory::create($user);
+        return view($roleObject->dashboardView());
+    })->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/settings/theme', [ThemeController::class, 'index'])->name('theme.index');
-    Route::post('/settings/theme', [ThemeController::class, 'update'])->name('theme.update');
+    Route::prefix('settings')->group(function () {
+        Route::get('/theme', [ThemeController::class, 'index'])->name('theme.index');
+        Route::post('/theme', [ThemeController::class, 'update'])->name('theme.update');
+    });
 
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('/projects/{project}/clone', [ProjectController::class, 'createFromTemplate'])->name('projects.clone');
-    Route::post('/projects/{project}/clone', [ProjectController::class, 'storeFromTemplate'])->name('projects.clone.store');
+    Route::resource('projects', ProjectController::class);
+
+    Route::prefix('projects/{project}')->group(function () {
+        Route::get('/clone', [ProjectController::class, 'createFromTemplate'])->name('projects.clone');
+        Route::post('/clone', [ProjectController::class, 'storeFromTemplate'])->name('projects.clone.store');
+        Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+        Route::get('/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+        Route::post('/', [ProjectController::class, 'update'])->name('projects.update');
+    });
+    
+    Route::post('tasks/{task}/update-assignment', [TaskController::class, 'update'])->name('tasks.update.assignment');
 });
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('companies', CompanyController::class);
+});
+
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::resource('users', UserController::class)->except(['create', 'store', 'show']);
 });
-
-Route::resource('projects', ProjectController::class);
-Route::post('tasks/{task}/update-assignment', [TaskController::class, 'update'])->name('tasks.update.assignment');
-
-Route::post('projects/{project}/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
 require __DIR__.'/auth.php';
