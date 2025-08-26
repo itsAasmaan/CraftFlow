@@ -39,7 +39,7 @@
                  <div class="overflow-hidden rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
                      <h3 class="mb-2 text-lg font-bold text-gray-900">📈 Reports</h3>
                      <p class="mb-4 text-gray-500">Generate system usage, performance, and progress reports.</p>
-                     <a href="#"
+                     <a href="{{ route('reports.index') }}"
                         class="inline-flex items-center rounded-md border border-transparent bg-amber-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-in-out hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2">
                          View Reports
                      </a>

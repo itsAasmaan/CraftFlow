@@ -51,4 +51,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('users', UserController::class)->except(['create', 'store', 'show']);
 });
 
+Route::middleware(['auth', 'role:admin,manager'])->group(function () {
+    Route::get('/reports', [App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
+    Route::post('/reports/generate', [App\Http\Controllers\ReportController::class, 'generate'])->name('reports.generate');
+});
+
 require __DIR__.'/auth.php';
