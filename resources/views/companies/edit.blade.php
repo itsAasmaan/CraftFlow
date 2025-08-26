@@ -24,8 +24,8 @@
                          <label for="theme" class="block text-sm font-medium text-gray-700">Theme</label>
                          <select name="theme" id="theme"
                                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                             <option value="minimal" @selected(old('theme', $company->theme)==='minimalist')>Minimal</option>
-                             <option value="modern" @selected(old('theme', $company->theme)==='corporate')>Modern</option>
+                             <option value="minimalist" @selected(old('theme', $company->theme)==='minimalist')>Minimal</option>
+                             <option value="corporate" @selected(old('theme', $company->theme)==='corporate')>Modern</option>
                              <option value="dark" @selected(old('theme', $company->theme)==='dark')>Dark</option>
                          </select>
                          @error('theme') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
