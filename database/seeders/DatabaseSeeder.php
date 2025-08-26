@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
        $companyId = DB::table('companies')->insertGetId([
             'name' => 'CraftFlow Inc.',
-            'theme' => 'minimal',
+            'theme' => 'minimalist',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('theme')->default('minimal'); 
+            $table->string('theme')->default('minimalist'); 
             $table->string('industry')->nullable();
             $table->string('website')->nullable();
             $table->text('description')->nullable();
