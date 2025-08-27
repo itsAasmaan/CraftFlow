@@ -20,14 +20,14 @@
                  </div>
                  {{-- Create Task Card --}}
                  <div class="overflow-hidden rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
-                     <h3 class="mb-2 text-lg font-bold text-gray-900">📝 Create Task</h3>
+                     <h3 class="mb-2 text-lg font-bold text-gray-900">📝 Manage Task</h3>
                      <p class="mb-4 text-gray-500">
                          Assign new tasks to employees and track their progress.
                      </p>
-                     {{-- <a href="{{ route('tasks.create') }}" --}}
-                        {{-- class="inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-in-out hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"> --}}
-                         Create Task
-                     {{-- </a> --}}
+                     <a href="{{ route('tasks.index') }}"
+                        class="inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-in-out hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        View Task
+                     </a>
                  </div>
                  {{-- Team Members Card --}}
                  <div class="overflow-hidden rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">

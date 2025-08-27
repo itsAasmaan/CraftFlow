@@ -8,9 +8,10 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::middleware('auth')->group(function () {
@@ -47,13 +48,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin,manager'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', UserController::class)->except(['create', 'store', 'show']);
 });
 
 Route::middleware(['auth', 'role:admin,manager'])->group(function () {
-    Route::get('/reports', [App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
-    Route::post('/reports/generate', [App\Http\Controllers\ReportController::class, 'generate'])->name('reports.generate');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('/reports/generate', [ReportController::class, 'generate'])->name('reports.generate');
+
+    Route::resource('tasks', TaskController::class)->except(['update']);
+    Route::post('/tasks/storeIndividually', [TaskController::class, 'storeIndividually'])->name('tasks.store.individually');
+    Route::put('/tasks/{task}/updateIndividually', [TaskController::class, 'updateIndividually'])->name('tasks.update.individually');
 });
 
 require __DIR__.'/auth.php';

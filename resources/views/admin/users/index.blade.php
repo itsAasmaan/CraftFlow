@@ -13,7 +13,9 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    @if(Auth::user()->role === 'admin')
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -22,9 +24,11 @@
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ ucfirst($user->role) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="{{ route('admin.users.edit', $user) }}" class="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">Edit</a>
-                                        </td>
+                                        @if(Auth::user()->role === 'admin')
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <a href="{{ route('admin.users.edit', $user) }}" class="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">Edit</a>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
