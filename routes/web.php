@@ -61,4 +61,12 @@ Route::middleware(['auth', 'role:admin,manager'])->group(function () {
     Route::put('/tasks/{task}/updateIndividually', [TaskController::class, 'updateIndividually'])->name('tasks.update.individually');
 });
 
+Route::middleware(['auth', 'role:employee'])->group(function () {
+    Route::get('/employee/tasks', [App\Http\Controllers\EmployeeTaskController::class, 'index'])
+        ->name('employee.tasks.index');
+    Route::get('/employee/tasks/{task}/edit', [App\Http\Controllers\EmployeeTaskController::class, 'edit'])
+        ->name('employee.tasks.edit');
+    Route::put('/employee/tasks/{task}', [App\Http\Controllers\EmployeeTaskController::class, 'update'])
+        ->name('employee.tasks.update');
+});
 require __DIR__.'/auth.php';

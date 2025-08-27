@@ -13,10 +13,9 @@
                     <p class="mb-4 text-gray-500">
                         View all tasks assigned to you and update their progress.
                     </p>
-                    {{-- <a href="{{ route('tasks.index') }}" --}}
-                        {{-- class="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-in-out hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"> --}}
+                    <a href="{{ route('employee.tasks.index') }}" class="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-in-out hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                         View Tasks
-                    {{-- </a> --}}
+                    </a>
                 </div>
                 {{-- Submit Report Card --}}
                 <div
